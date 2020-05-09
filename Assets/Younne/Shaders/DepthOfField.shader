@@ -47,6 +47,10 @@
 				depth = LinearEyeDepth(depth);
 
 				float coc = (depth - _FocusDistance) / _FocusRange;
+				coc = clamp(coc, -1, 1);
+				if (coc < 0) {
+					return coc * -half4(1, 0, 0, 1);
+				}
 				return coc;
 			}
 			ENDCG
